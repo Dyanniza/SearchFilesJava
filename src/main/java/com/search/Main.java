@@ -15,6 +15,5 @@ public class Main
     public static void main (String [] arg)
     {
         Controller control = new Controller();
-        //MainWindow SearchC = new MainWindow();
     }
 }
