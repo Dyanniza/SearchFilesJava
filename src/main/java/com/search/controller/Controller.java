@@ -10,6 +10,7 @@ package com.search.controller;
 
 import com.search.model.FileResult;
 import com.search.model.Search;
+import com.search.model.Asset;
 import com.search.view.MainWindow;
 import com.search.controller.Criteria;
 
@@ -21,7 +22,7 @@ public class Controller
 {
     private MainWindow searchC;
     private Search search;
-    private File FileResult;
+    //private Asset asset;
     private Criteria fCriteria;
 
     /*
@@ -40,8 +41,8 @@ public class Controller
     /*
      * Method:getCriteriaView
      * Description: This method will return the actions from the view and the model packages. On view will capture the
-     * criteria and pass them to the mode.
-     * On Model will capture the results and pass them to the view
+     * criteria on an Object and pass them to the model.
+     * On Model will capture the results checking if is an instance of FileResult and pass them to the view
      * Additionally will also clean the table before showing the results or perform a new search
      */
     private void getCriteriaView()
@@ -49,21 +50,29 @@ public class Controller
         fCriteria=new Criteria();
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
+        fCriteria.setExt(searchC.getPanel().getExtension());
+        fCriteria.setModDate(searchC.getPanel().getModifiedDate());
 
-        List<FileResult> filesR=search.initSearch(fCriteria.getPath(),fCriteria.getFileName());
+        System.out.println(fCriteria.getModDate());
 
+        //List<Asset> filesR=search.initSearch(fCriteria.getPath(),fCriteria.getFileName(),fCriteria.getExt());
+        List<Asset> filesR=search.initSearch(fCriteria);
+        
         searchC.getTableModel().setRowCount(0);
 
 
-        for(FileResult fresult: filesR)
+        for(Asset fresult: filesR)
         {
+            //if(filesR instanceof FileResult)
+            //{
+                String spath = fresult.getPath();
+                String sfilename = fresult.getFileName();
+                String sextension = "date";
+                String sdate = "dddd";
+                String[] dataresult= {spath,sfilename,sextension,sdate};
+                this.searchC.getTableModel().addRow(dataresult);
+            //}
 
-            String spath = fresult.getPath();
-            String sfilename = fresult.getFileName();
-            String sextension = "date";
-            String sdate = "dddd";
-            String[] dataresult= {spath,sfilename,sextension,sdate};
-            this.searchC.getTableModel().addRow(dataresult);
         }
         filesR.clear();
     }

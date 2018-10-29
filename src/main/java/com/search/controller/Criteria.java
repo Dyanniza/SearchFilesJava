@@ -9,11 +9,14 @@
 
 package com.search.controller;
 
+import java.util.Date;
+
 public class Criteria
 {
     private String path;
     private String fileName;
     private String ext;
+    private Date moddate;
 
     public void setPath(String path)
     {
@@ -43,5 +46,15 @@ public class Criteria
     public String getExt()
     {
         return this.ext;
+    }
+
+    public void setModDate(Date datev)
+    {
+        this.moddate = datev;
+    }
+
+    public Date getModDate()
+    {
+        return this.moddate;
     }
 }
