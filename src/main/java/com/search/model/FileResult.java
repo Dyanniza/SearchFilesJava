@@ -8,43 +8,10 @@
  */
 package com.search.model;
 
-public class FileResult
+public class FileResult extends Asset
 {
-    private String path;
-    private String fileName;
-    private String ext;
-
-    public FileResult()
+       public FileResult()
     {
     }
 
-    public void setPath(String path)
-    {
-        this.path = path;
-    }
-
-    public String getPath()
-    {
-        return this.path;
-    }
-
-    public void setFileName(String fileName)
-    {
-        this.fileName = fileName;
-    }
-
-    public String getFileName()
-    {
-        return this.fileName;
-    }
-
-    public void setExt(String ext)
-    {
-        this.ext = ext;
-    }
-
-    public String getExt()
-    {
-        return this.ext;
-    }
 }
