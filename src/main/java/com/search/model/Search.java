@@ -26,7 +26,6 @@ public class Search
         File fileP = new File(path);
         File[] fileList= fileP.listFiles();
         String fileN;
-        result.clear();
 
         for(File f : fileList)
         {

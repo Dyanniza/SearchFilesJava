@@ -11,7 +11,7 @@ package com.search.controller;
 import com.search.model.FileResult;
 import com.search.model.Search;
 import com.search.view.MainWindow;
-import main.java.com.search.controller.Criteria;
+import com.search.controller.Criteria;
 
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class Controller
 {
-    private MainWindow SearchC;
+    private MainWindow searchC;
     private Search search;
     private File FileResult;
-    private Criteria FCriteria;
+    private Criteria fCriteria;
 
     /*
      * Method:Controller
@@ -31,9 +31,9 @@ public class Controller
      */
     public Controller()
     {
-        SearchC = new MainWindow();
+        searchC = new MainWindow();
         search = new Search();
-        SearchC.getPanel().getButtonSearch().addActionListener(e -> getCriteriaView());
+        searchC.getPanel().getButtonSearch().addActionListener(e -> getCriteriaView());
     }
 
 
@@ -46,23 +46,26 @@ public class Controller
      */
     private void getCriteriaView()
     {
-        FCriteria=new Criteria();
-        FCriteria.setPath(SearchC.getPanel().getPath());
-        FCriteria.setFileName(SearchC.getPanel().getFileName());
+        fCriteria=new Criteria();
+        fCriteria.setPath(searchC.getPanel().getPath());
+        fCriteria.setFileName(searchC.getPanel().getFileName());
 
-        List<FileResult> filesR=search.initSearch(FCriteria.getPath(),FCriteria.getFileName());
+        List<FileResult> filesR=search.initSearch(fCriteria.getPath(),fCriteria.getFileName());
 
-        SearchC.getTableModel().setRowCount(0);
+        searchC.getTableModel().setRowCount(0);
+
 
         for(FileResult fresult: filesR)
         {
-            String p = fresult.getPath();
-            String fn = fresult.getFileName();
-            String t = "date";
-            String g = "dddd";
-            String[] dataresult= {p,fn,t,g};
-            this.SearchC.getTableModel().addRow(dataresult);
+
+            String spath = fresult.getPath();
+            String sfilename = fresult.getFileName();
+            String sextension = "date";
+            String sdate = "dddd";
+            String[] dataresult= {spath,sfilename,sextension,sdate};
+            this.searchC.getTableModel().addRow(dataresult);
         }
+        filesR.clear();
     }
 }
 

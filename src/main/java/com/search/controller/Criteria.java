@@ -7,7 +7,7 @@
  * of the license agreement you entered into  with Jalasoft.
  */
 
-package main.java.com.search.controller;
+package com.search.controller;
 
 public class Criteria
 {
@@ -35,17 +35,13 @@ public class Criteria
         return this.fileName;
     }
 
-    /*
     public void setExt(String ext)
-
     {
-        this.ext = Searchv.getPanel().getext();
+        this.ext = ext;
     }
 
     public String getExt()
     {
         return this.ext;
     }
-
-*/
 }
