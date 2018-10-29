@@ -26,7 +26,7 @@ public class PanelSearchResults extends JPanel
     private JTable tableResults;
 
     private JScrollPane tableScroll;
-    private Object columnNames [] = {"File Name", "Location","Size", "Date Created"};
+    private Object columnNames [] = {"Location", "File Name","Size", "Date Modified"};
     private Object tableData[][]= {};
 
 
@@ -42,10 +42,6 @@ public class PanelSearchResults extends JPanel
         tableModel = new DefaultTableModel(tableData, columnNames);
        // DefaultTableModel tableModel = (DefaultTableModel) tableResults.getModel();
         tableResults = new JTable(tableModel);
-
-
-        //tableResults.getModel();
-
         setLayout(new BorderLayout());
         tableScroll = new JScrollPane(tableResults);
         add(tableScroll, BorderLayout.CENTER);
@@ -55,7 +51,9 @@ public class PanelSearchResults extends JPanel
     }
 
     public void init()
-    {}
+    {
+
+    }
     public DefaultTableModel getTableModel()
     {
         return tableModel;
