@@ -36,7 +36,7 @@ public class MainWindow extends JFrame
     {
         panelSearch = new PanelSearchParameters();
         panelResults = new PanelSearchResults();
-        getContentPane().setLayout(new GridLayout(2,2));
+        getContentPane().setLayout(new GridLayout(1,2));
         getContentPane().add(panelSearch);
         getContentPane().add(panelResults);
         setVisible(true);
