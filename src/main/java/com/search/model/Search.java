@@ -26,6 +26,7 @@ public class Search
         File[] fileList = fileP.listFiles();
         String fileN;
         String onlyFileName;
+        String onlyFileExtension;
 
         for (File f : fileList) {
             // If f is directory the method is called again with the path and the filename
@@ -36,6 +37,7 @@ public class Search
             } else {
                 fileN = f.getName();
                 onlyFileName=fileN.substring(0,fileN.lastIndexOf('.'));
+                onlyFileExtension=fileN.substring(fileN.lastIndexOf('.'),fileN.length());
                 // If filename is empty or filename found is equal to the parameter given the
                 // path and file name is added to the result
                 if (fileN.endsWith(criteria.getExt()) || criteria.getExt().isEmpty())
@@ -44,7 +46,9 @@ public class Search
                     {
                         Asset fr = new Asset();
                         fr.setPath(f.getPath());
-                        fr.setFileName(f.getName());
+                        fr.setFileName(onlyFileName);
+                        fr.setExt(onlyFileExtension);
+                        fr.setModifiedDate(f.lastModified());
                         result.add(fr);
                     }
                 }

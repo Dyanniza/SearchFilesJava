@@ -67,8 +67,8 @@ public class Controller
             //{
                 String spath = fresult.getPath();
                 String sfilename = fresult.getFileName();
-                String sextension = "date";
-                String sdate = "dddd";
+                String sextension = fresult.getExt();
+                String sdate = Long.toString(fresult.getModifiedDate());
                 String[] dataresult= {spath,sfilename,sextension,sdate};
                 this.searchC.getTableModel().addRow(dataresult);
             //}

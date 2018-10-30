@@ -28,7 +28,7 @@ public class MainWindow extends JFrame
     public void settings()
     {
         setTitle("SearchC  - File searcher");
-        setSize(600,600);
+        setSize(1000,800);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
