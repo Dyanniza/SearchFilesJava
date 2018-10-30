@@ -5,6 +5,7 @@ public class Asset
     private String path;
     private String fileName;
     private String ext;
+    private long mDate;
 
     public Asset()
     {
@@ -38,5 +39,13 @@ public class Asset
     public String getExt()
     {
         return this.ext;
+    }
+    public long getModifiedDate()
+    {
+        return this.mDate;
+    }
+    public void setModifiedDate(long mDate)
+    {
+        this.mDate = mDate;
     }
 }

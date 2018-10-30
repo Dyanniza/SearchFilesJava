@@ -38,6 +38,8 @@ public class PanelSearchParameters extends JPanel{
     private JLabel labelExtension;
     private JLabel labelDateCriteria;
     private JLabel labelSelectedMDate;
+    private JLabel labelSelectedCDate;
+    private JLabel labelSelectedADate;
     private JLabel labelSize;
     private JLabel labelKind;
     private JLabel labelAdvancedOptions;
@@ -52,10 +54,18 @@ public class PanelSearchParameters extends JPanel{
     private JPanel panelButtons;
     private JPanel panelUp;
     private JFileChooser fileChooser;
-    private UtilDateModel dateModel;
-    private Properties dateProperties;
-    private JDatePanelImpl datePanel;
-    private JDatePickerImpl datePicker;
+    private UtilDateModel dateModelM;
+    private Properties datePropertiesM;
+    private JDatePanelImpl datePanelM;
+    private UtilDateModel dateModelA;
+    private Properties datePropertiesA;
+    private JDatePanelImpl datePanelA;
+    private UtilDateModel dateModelC;
+    private Properties datePropertiesC;
+    private JDatePanelImpl datePanelC;
+    private JDatePickerImpl datePickerM;
+    private JDatePickerImpl datePickerA;
+    private JDatePickerImpl datePickerC;
     private JComboBox comboFileSize;
     private JComboBox comboFileKind;
     private JCheckBox checkBoxHidden;
@@ -78,6 +88,8 @@ public class PanelSearchParameters extends JPanel{
         labelExtension = new JLabel("Extension:");
         labelDateCriteria = new JLabel("Date Criteria:");
         labelSelectedMDate = new JLabel("Modified Date:");
+        labelSelectedADate = new JLabel("Last Access Date:");
+        labelSelectedCDate = new JLabel("Created Date:");
         labelSize = new JLabel("Size:");
         labelKind = new JLabel("Kind:");
         labelAdvancedOptions = new JLabel("Advanced Options");
@@ -88,13 +100,30 @@ public class PanelSearchParameters extends JPanel{
         buttonSearch = new JButton("Search");
         buttonChooser = new JButton("Select Path");
         fileChooser = new JFileChooser("c:/");
-        dateModel = new UtilDateModel();
-        dateProperties = new Properties();
-        dateProperties.put("text.today","Today");
-        dateProperties.put("text.month", "Month");
-        dateProperties.put("text.year", "Year");
-        datePanel = new JDatePanelImpl(dateModel,dateProperties);
-        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        dateModelM = new UtilDateModel();
+        datePropertiesM = new Properties();
+        datePropertiesM.put("text.today","Today");
+        datePropertiesM.put("text.month", "Month");
+        datePropertiesM.put("text.year", "Year");
+        datePanelM = new JDatePanelImpl(dateModelM, datePropertiesM);
+
+        dateModelA = new UtilDateModel();
+        datePropertiesA = new Properties();
+        datePropertiesA.put("text.today","Today");
+        datePropertiesA.put("text.month", "Month");
+        datePropertiesA.put("text.year", "Year");
+        datePanelA = new JDatePanelImpl(dateModelA, datePropertiesA);
+
+        dateModelC = new UtilDateModel();
+        datePropertiesC = new Properties();
+        datePropertiesC.put("text.today","Today");
+        datePropertiesC.put("text.month", "Month");
+        datePropertiesC.put("text.year", "Year");
+        datePanelC = new JDatePanelImpl(dateModelC, datePropertiesC);
+
+        datePickerM = new JDatePickerImpl(datePanelM, new DateComponentFormatter());
+        datePickerA = new JDatePickerImpl(datePanelA, new DateComponentFormatter());
+        datePickerC = new JDatePickerImpl(datePanelC, new DateComponentFormatter());
         comboFileSize = new JComboBox(setSizeList());
         comboFileKind = new JComboBox(setKindList());
         checkBoxHidden = new JCheckBox("Hidden fields?", false);
@@ -108,20 +137,25 @@ public class PanelSearchParameters extends JPanel{
 
     public void init()
     {
-        panelFieldNames.setLayout(new GridLayout(8,0));
+        panelFieldNames.setLayout(new GridLayout(12,0));
         panelFieldNames.add(labelPath);
         panelFieldNames.add(labelFileName);
         panelFieldNames.add(labelExtension);
         panelFieldNames.add(labelSelectedMDate);
+        panelFieldNames.add(labelSelectedADate);
+        panelFieldNames.add(labelSelectedCDate);
         panelFieldNames.add(labelSize);
         panelFieldNames.add(labelKind);
         panelFieldNames.add(labelAdvancedOptions);
 
-        panelInputFields.setLayout(new GridLayout(8,0));
+        panelInputFields.setLayout(new GridLayout(12,0));
         panelInputFields.add(textPath);
         panelInputFields.add(fileName);
         panelInputFields.add(extension);
-        panelInputFields.add(datePicker);
+        panelInputFields.add(datePickerM);
+        panelInputFields.add(datePickerA);
+        panelInputFields.add(datePickerC);
+
         panelInputFields.add(comboFileSize);
         panelInputFields.add(comboFileKind);
         panelInputFields.add(checkBoxHidden);
@@ -207,7 +241,7 @@ public class PanelSearchParameters extends JPanel{
 
     public Date getModifiedDate()
     {
-        Date selectedDate = (Date) datePicker.getModel().getValue();
+        Date selectedDate = (Date) datePickerM.getModel().getValue();
         System.out.println(selectedDate);
         return selectedDate;
     }
