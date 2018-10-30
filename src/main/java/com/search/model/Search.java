@@ -10,6 +10,8 @@ package com.search.model;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import com.search.controller.Criteria;
+
 
 public class Search
 {
@@ -19,8 +21,8 @@ public class Search
     {
     }
     // This method searches by path and filename, returns a list of FileResult objects
-    public List<Asset> initSearch(String path, String filename, String ext) {
-        File fileP = new File(path);
+    public List<Asset> initSearch(Criteria criteria) {
+        File fileP = new File(criteria.getPath());
         File[] fileList = fileP.listFiles();
         String fileN;
         String onlyFileName;
@@ -28,15 +30,17 @@ public class Search
         for (File f : fileList) {
             // If f is directory the method is called again with the path and the filename
             if (f.isDirectory()) {
-                initSearch(f.getPath(), filename, ext);
+                criteria.setPath(f.getPath());
+               // initSearch(f.getPath(), criteria.getFileName, criteria.getExt);
+                initSearch(criteria);
             } else {
                 fileN = f.getName();
                 onlyFileName=fileN.substring(0,fileN.lastIndexOf('.'));
                 // If filename is empty or filename found is equal to the parameter given the
                 // path and file name is added to the result
-                if (fileN.endsWith(ext) || ext.isEmpty())
+                if (fileN.endsWith(criteria.getExt()) || criteria.getExt().isEmpty())
                 {
-                    if (filename.isEmpty() || onlyFileName.equals(filename))
+                    if (criteria.getFileName().isEmpty() || onlyFileName.equals(criteria.getFileName()))
                     {
                         Asset fr = new Asset();
                         fr.setPath(f.getPath());
