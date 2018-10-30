@@ -1,4 +1,4 @@
-package main.java.com.search.model;
+package com.search.model;
 
 public class Asset
 {
