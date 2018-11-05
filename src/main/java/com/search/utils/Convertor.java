@@ -7,7 +7,7 @@
  *
  */
 
-package main.java.com.search.utils;
+package com.search.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,5 +37,19 @@ public class Convertor
     public double converToBytes(String sizef)
     {
         return 0;
+    }
+
+    public String converBooleanToString(Boolean boolValue)
+    {
+        String res;
+        if(boolValue)
+        {
+            res="Yes";
+        }else
+        {
+            res="No";
+        }
+
+        return res;
     }
 }

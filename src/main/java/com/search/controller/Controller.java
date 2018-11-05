@@ -11,7 +11,7 @@ package com.search.controller;
 import com.search.model.Search;
 import com.search.model.Asset;
 import com.search.view.MainWindow;
-import main.java.com.search.utils.Convertor;
+import com.search.utils.Convertor;
 import com.search.view.PanelSearchParameters;
 
 
@@ -56,19 +56,25 @@ public class Controller
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
         fCriteria.setExt(searchC.getPanel().getExtension());
-        fCriteria.setModDate(searchC.getPanel().getModifiedDate());
+       // fCriteria.setModDate(searchC.getPanel().getModifiedDate());
+      //  fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
+       // fCriteria.setAccDate(searchC.getPanel().getAccessDate());
+       // fCriteria.setFsize(searchC.getPanel().getFileSize());
+        fCriteria.setFHidden(searchC.getPanel().getIfHidden());
+       // fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
+       // fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
 
 
         List<Asset> filesR=search.initSearch(fCriteria);
         
         searchC.getTableModel().setRowCount(0);
 
-        if(filesR.isEmpty()||filesR==null||filesR.size() == 0 )
+       /* if(filesR.isEmpty()||filesR==null||filesR.size() == 0 )
         {
             JOptionPane.showMessageDialog(null,"Search Results:\n" + " No files found");
 
         }else
-        {
+        {*/
             for(Asset fresult: filesR)
             {
                 //if(filesR instanceof FileResult)
@@ -78,14 +84,17 @@ public class Controller
                 String sfilename = fresult.getFileName();
                 String sextension = fresult.getExt();
                 String sdate=confile.converToStringWithFormat(fresult.getModifiedDate());
+                String shidden=confile.converBooleanToString(fresult.getHidden());
+                String sreadonly=confile.converBooleanToString(fresult.getReadOnly());
 
-                String[] dataresult= {spath,sfilename,sextension,sdate};
+
+                //String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
+                String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
                 this.searchC.getTableModel().addRow(dataresult);
                 //}
 
             }
-        }
-
+       //
         filesR.clear();
     }
 }

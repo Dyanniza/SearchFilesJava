@@ -14,7 +14,16 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -65,6 +74,8 @@ public class PanelSearchParameters extends JPanel{
     private JComboBox comboFileKind;
     private JCheckBox checkBoxHidden;
     private JCheckBox checkBoxDirectory;
+    private JCheckBox checkBoxReadOnly;
+
 
     public PanelSearchParameters()
     {
@@ -125,6 +136,7 @@ public class PanelSearchParameters extends JPanel{
         comboFileKind = new JComboBox(setKindList());
         checkBoxHidden = new JCheckBox("Hidden fields?", false);
         checkBoxDirectory = new JCheckBox("Directory Only?", false);
+        checkBoxReadOnly = new JCheckBox("Read Only", false);
 
         panelFieldNames = new JPanel();
         panelInputFields = new JPanel();
@@ -134,7 +146,7 @@ public class PanelSearchParameters extends JPanel{
 
     public void init()
     {
-        panelFieldNames.setLayout(new GridLayout(14,0));
+        panelFieldNames.setLayout(new GridLayout(15,0));
         panelFieldNames.add(labelPath);
         panelFieldNames.add(labelFileName);
         panelFieldNames.add(labelExtension);
@@ -146,7 +158,7 @@ public class PanelSearchParameters extends JPanel{
         panelFieldNames.add(labelKind);
         panelFieldNames.add(labelAdvancedOptions);
 
-        panelInputFields.setLayout(new GridLayout(14,0));
+        panelInputFields.setLayout(new GridLayout(15,0));
         panelInputFields.add(textPath);
         panelInputFields.add(fileName);
         panelInputFields.add(extension);
@@ -159,6 +171,7 @@ public class PanelSearchParameters extends JPanel{
         panelInputFields.add(comboFileKind);
         panelInputFields.add(checkBoxHidden);
         panelInputFields.add(checkBoxDirectory);
+        panelInputFields.add(checkBoxReadOnly);
 
         panelUp.setLayout(new GridLayout(1,1));
         panelUp.setPreferredSize(new Dimension(300,200));
@@ -244,7 +257,7 @@ public class PanelSearchParameters extends JPanel{
         System.out.println(selectedDate);
         return selectedDate;
     }
-    public Date getLastAccessDate()
+    public Date getAccessDate()
     {
         Date selectedDate = (Date) datePickerA.getModel().getValue();
         System.out.println(selectedDate);
@@ -301,6 +314,10 @@ public class PanelSearchParameters extends JPanel{
     public boolean getIfOnlyDir()
     {
         return checkBoxDirectory.isSelected();
+    }
+    public boolean getIfReadOnly()
+    {
+        return checkBoxReadOnly.isSelected();
     }
 
 }

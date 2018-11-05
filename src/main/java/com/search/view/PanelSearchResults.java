@@ -26,7 +26,7 @@ public class PanelSearchResults extends JPanel
     private JTable tableResults;
 
     private JScrollPane tableScroll;
-    private Object columnNames [] = {"Location", "File Name","Extension", "Modified Date"};
+    private Object columnNames [] = {"Location", "File Name","Extension","Modified Date","Hidden File","Read Only"};
     private Object tableData[][]= {};
 
 
