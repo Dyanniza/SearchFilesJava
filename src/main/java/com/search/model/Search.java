@@ -52,34 +52,34 @@ public class Search
                     if (criteria.getFileName().isEmpty() || onlyFileName.contains(criteria.getFileName()))
                     {
                         modDate= Long.compare(f.lastModified(),criteria.getModDate());
-                        if ((criteria.getModDate().toString()).isEmpty() || (modDate==0))
+                        if ((criteria.getModDate()==0) || (modDate==0))
                         {
-                            BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
-                            FileTime creDate = attrs.creationTime();
-                            if ((criteria.getCreDate().toString()).isEmpty() || creDate.compareTo(criteria.getCreDate()))
-                            {
-                                FileTime accDate = attrs.lastAccessTime();
-                                if ((criteria.getAccDate().toString()).isEmpty() || accDate.compareTo(criteria.getAccDate()))
-                                {
+                           // BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+                           // FileTime creDate = attrs.creationTime();
+                           // if ((criteria.getCreDate().toString()).isEmpty() || creDate.compareTo(criteria.getCreDate()))
+                           // {
+                            //    FileTime accDate = attrs.lastAccessTime();
+                              //  if ((criteria.getAccDate().toString()).isEmpty() || accDate.compareTo(criteria.getAccDate()))
+                               // {
                                     Asset fr = new Asset();
                                     fr.setPath(f.getPath());
                                     fr.setFileName(onlyFileName);
                                     fr.setExt(onlyFileExtension);
                                     fr.setModifiedDate(f.lastModified());
-                                    fr.setCreatedDate(creDate);
-                                    fr.setAccessDate(accDate);
+                                  //  fr.setCreatedDate(creDate);
+                                   // fr.setAccessDate(accDate);
                                     fr.setHidden(f.isHidden());
                                     fr.setReadOnly(f.canWrite());
-                                    if(criteria.getHidden()==false && criteria.getReadonly()==false)
+                                    if(criteria.getFHidden()==false && criteria.getFReadOnly()==false)
                                     {
                                         result.add(fr);
                                     } else
                                     {
-                                        if((f.isHidden()==criteria.getHidden)&&(!f.canWrite()==criteria.getReadOnly()))
+                                        if((f.isHidden()==criteria.getFHidden())&&(!f.canWrite()==criteria.getFReadOnly()))
                                             result.add(fr);
-                                    }
-                                }
-                            }
+                                 }
+                              //  }
+                           // }
                         }
                     }
                 }

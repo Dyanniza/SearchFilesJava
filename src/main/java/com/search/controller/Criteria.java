@@ -16,7 +16,13 @@ public class Criteria
     private String path;
     private String fileName;
     private String ext;
-    private Date moddate;
+    private long moddate;
+    private Date accdate;
+    private Date credate;
+    private int fsize;
+    private boolean fhidden;
+    private boolean freadonly;
+    private boolean fonlydir;
 
     public void setPath(String path)
     {
@@ -50,11 +56,73 @@ public class Criteria
 
     public void setModDate(Date datev)
     {
-        this.moddate = datev;
+        //this.moddate = datev;
+        this.moddate = 118150020;
     }
 
-    public Date getModDate()
+    public long getModDate()
     {
         return this.moddate;
     }
+
+    public void setAccDate(Date datea)
+    {
+        this.accdate = datea;
+    }
+
+    public Date getAccDate()
+    {
+        return this.accdate;
+    }
+
+    public void setCreDate(Date datec)
+    {
+        this.credate = datec;
+    }
+
+    public Date getCreDate()
+    {
+        return this.credate;
+    }
+
+    public void setFsize(int size)
+    {
+        this.fsize = size;
+    }
+
+    public int getFsize()
+    {
+        return this.fsize;
+    }
+
+    public void setFHidden(boolean hidden)
+    {
+        this.fhidden = hidden;
+    }
+
+    public boolean getFHidden()
+    {
+        return this.fhidden;
+    }
+
+    public void setFReadOnly(boolean readOnly)
+    {
+        this.freadonly = readOnly;
+    }
+
+    public boolean getFReadOnly()
+    {
+        return this.freadonly;
+    }
+
+    public void setFIsDirectory(boolean isDirectory)
+    {
+        this.fonlydir = isDirectory;
+    }
+
+    public boolean getFIsDirectory()
+    {
+        return this.fonlydir;
+    }
+
 }

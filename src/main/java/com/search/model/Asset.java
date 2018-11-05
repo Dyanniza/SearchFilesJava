@@ -58,7 +58,7 @@ public class Asset
         this.mDate = mDate;
     }
 
-    public Date getCreatedDate()
+    public FileTime getCreatedDate()
     {
         return this.cDate;
     }
@@ -68,7 +68,7 @@ public class Asset
         this.cDate = cDate;
     }
 
-    public Date getAccessDate()
+    public FileTime getAccessDate()
     {
         return this.aDate;
     }
