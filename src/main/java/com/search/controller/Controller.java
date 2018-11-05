@@ -8,15 +8,18 @@
  */
 package com.search.controller;
 
-import com.search.model.FileResult;
 import com.search.model.Search;
 import com.search.model.Asset;
 import com.search.view.MainWindow;
-import com.search.controller.Criteria;
+import main.java.com.search.utils.Convertor;
+import com.search.view.PanelSearchParameters;
 
-import javax.swing.table.DefaultTableModel;
-import java.io.File;
+
+import javax.swing.*;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 public class Controller
 {
@@ -35,6 +38,7 @@ public class Controller
         searchC = new MainWindow();
         search = new Search();
         searchC.getPanel().getButtonSearch().addActionListener(e -> getCriteriaView());
+
     }
 
 
@@ -47,33 +51,41 @@ public class Controller
      */
     private void getCriteriaView()
     {
+        Convertor confile=new Convertor();
         fCriteria=new Criteria();
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
         fCriteria.setExt(searchC.getPanel().getExtension());
         fCriteria.setModDate(searchC.getPanel().getModifiedDate());
 
-        System.out.println(fCriteria.getModDate());
 
-        //List<Asset> filesR=search.initSearch(fCriteria.getPath(),fCriteria.getFileName(),fCriteria.getExt());
         List<Asset> filesR=search.initSearch(fCriteria);
         
         searchC.getTableModel().setRowCount(0);
 
-
-        for(Asset fresult: filesR)
+        if(filesR.isEmpty()||filesR==null||filesR.size() == 0 )
         {
-            //if(filesR instanceof FileResult)
-            //{
+            JOptionPane.showMessageDialog(null,"Search Results:\n" + " No files found");
+
+        }else
+        {
+            for(Asset fresult: filesR)
+            {
+                //if(filesR instanceof FileResult)
+                //{
+
                 String spath = fresult.getPath();
                 String sfilename = fresult.getFileName();
                 String sextension = fresult.getExt();
-                String sdate = Long.toString(fresult.getModifiedDate());
+                String sdate=confile.converToStringWithFormat(fresult.getModifiedDate());
+
                 String[] dataresult= {spath,sfilename,sextension,sdate};
                 this.searchC.getTableModel().addRow(dataresult);
-            //}
+                //}
 
+            }
         }
+
         filesR.clear();
     }
 }
