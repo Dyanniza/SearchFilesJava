@@ -13,15 +13,8 @@ import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -44,9 +37,11 @@ public class PanelSearchParameters extends JPanel{
     private JLabel labelKind;
     private JLabel labelAdvancedOptions;
     private JLabel labelHidden;
+    private JLabel empty;
     private JTextField textPath;
     private JTextField fileName;
     private JTextField extension;
+    private JTextField fileSize;
     private JButton buttonSearch;
     private JButton buttonChooser;
     private JPanel panelFieldNames;
@@ -93,10 +88,12 @@ public class PanelSearchParameters extends JPanel{
         labelSize = new JLabel("Size:");
         labelKind = new JLabel("Kind:");
         labelAdvancedOptions = new JLabel("Advanced Options");
+        empty = new JLabel();
 
         textPath = new JTextField(20);
         fileName = new JTextField(20);
         extension = new JTextField(20);
+        fileSize = new JFormattedTextField();
         buttonSearch = new JButton("Search");
         buttonChooser = new JButton("Select Path");
         fileChooser = new JFileChooser("c:/");
@@ -137,7 +134,7 @@ public class PanelSearchParameters extends JPanel{
 
     public void init()
     {
-        panelFieldNames.setLayout(new GridLayout(12,0));
+        panelFieldNames.setLayout(new GridLayout(14,0));
         panelFieldNames.add(labelPath);
         panelFieldNames.add(labelFileName);
         panelFieldNames.add(labelExtension);
@@ -145,16 +142,18 @@ public class PanelSearchParameters extends JPanel{
         panelFieldNames.add(labelSelectedADate);
         panelFieldNames.add(labelSelectedCDate);
         panelFieldNames.add(labelSize);
+        panelFieldNames.add(empty);
         panelFieldNames.add(labelKind);
         panelFieldNames.add(labelAdvancedOptions);
 
-        panelInputFields.setLayout(new GridLayout(12,0));
+        panelInputFields.setLayout(new GridLayout(14,0));
         panelInputFields.add(textPath);
         panelInputFields.add(fileName);
         panelInputFields.add(extension);
         panelInputFields.add(datePickerM);
         panelInputFields.add(datePickerA);
         panelInputFields.add(datePickerC);
+        panelInputFields.add(fileSize);
 
         panelInputFields.add(comboFileSize);
         panelInputFields.add(comboFileKind);
@@ -245,21 +244,35 @@ public class PanelSearchParameters extends JPanel{
         System.out.println(selectedDate);
         return selectedDate;
     }
+    public Date getLastAccessDate()
+    {
+        Date selectedDate = (Date) datePickerA.getModel().getValue();
+        System.out.println(selectedDate);
+        return selectedDate;
+    }
+    public Date getCreatedDate()
+    {
+        Date selectedDate = (Date) datePickerA.getModel().getValue();
+        System.out.println(selectedDate);
+        return selectedDate;
+    }
+    public int getFileSize()
+    {   int numFileSize;
+        String sFileSize = fileSize.getText();
+        numFileSize = Integer.parseInt(sFileSize);
+        return numFileSize;
+    }
     public void requirePath()
     {
         labelPath.setForeground(Color.RED);
     }
     public String[] setSizeList()
     {
-        String[] sizeList = new String[8];
-        sizeList [0] = "Empty (0 KB)";
-        sizeList [1] = "Tiny (0 - 10 KB)";
-        sizeList [2] = "Small (10 - 100KB)";
-        sizeList [3] = "Medium (100 KB - 1MB)";
-        sizeList [4] = "Large(1 - 16 MB)";
-        sizeList [5] = "Huge(16 - 128MB)";
-        sizeList [6] = "Gigantic(>128 MB)";
-        sizeList [7] = "Other";
+        String[] sizeList = new String[4];
+        sizeList [0] = "Clear";
+        sizeList [1] = " KB ";
+        sizeList [2] = " MB ";
+        sizeList [3] = " GB ";
         return sizeList;
     }
 
@@ -281,4 +294,13 @@ public class PanelSearchParameters extends JPanel{
     {
         return comboFileSize;
     }
+    public boolean getIfHidden()
+    {
+        return checkBoxHidden.isSelected();
+    }
+    public boolean getIfOnlyDir()
+    {
+        return checkBoxDirectory.isSelected();
+    }
+
 }
