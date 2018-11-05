@@ -12,6 +12,7 @@ import com.search.model.Search;
 import com.search.model.Asset;
 import com.search.view.MainWindow;
 import com.search.utils.Convertor;
+
 import com.search.view.PanelSearchParameters;
 
 
@@ -61,7 +62,7 @@ public class Controller
        // fCriteria.setAccDate(searchC.getPanel().getAccessDate());
        // fCriteria.setFsize(searchC.getPanel().getFileSize());
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
-       // fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
+        fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
        // fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
 
 

@@ -69,7 +69,7 @@ public class Search
                                   //  fr.setCreatedDate(creDate);
                                    // fr.setAccessDate(accDate);
                                     fr.setHidden(f.isHidden());
-                                    fr.setReadOnly(f.canWrite());
+                                    fr.setReadOnly(!f.canWrite());
                                     if(criteria.getFHidden()==false && criteria.getFReadOnly()==false)
                                     {
                                         result.add(fr);
