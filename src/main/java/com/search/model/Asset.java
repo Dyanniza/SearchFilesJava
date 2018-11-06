@@ -8,11 +8,12 @@ public class Asset
     private String path;
     private String fileName;
     private String ext;
-    private long mDate;
-    private FileTime cDate;
-    private FileTime aDate;
+    private String mDate;
+    private String cDate;
+    private String aDate;
     private boolean hidden;
     private boolean readOnly;
+    private long size;
 
     public Asset()
     {
@@ -48,32 +49,32 @@ public class Asset
         return this.ext;
     }
 
-    public long getModifiedDate()
+    public String getModifiedDate()
     {
         return this.mDate;
     }
 
-    public void setModifiedDate(long mDate)
+    public void setModifiedDate(String mDate)
     {
         this.mDate = mDate;
     }
 
-    public FileTime getCreatedDate()
+    public String getCreatedDate()
     {
         return this.cDate;
     }
 
-    public void setCreatedDate(FileTime cDate)
+    public void setCreatedDate(String cDate)
     {
         this.cDate = cDate;
     }
 
-    public FileTime getAccessDate()
+    public String getAccessDate()
     {
         return this.aDate;
     }
 
-    public void setAccessDate(FileTime aDate)
+    public void setAccessDate(String aDate)
     {
         this.aDate = aDate;
     }
@@ -96,6 +97,16 @@ public class Asset
     public void setReadOnly(Boolean readOnly)
     {
         this.readOnly = readOnly;
+    }
+
+    public long getSize()
+    {
+        return this.size;
+    }
+
+    public void setSize(long size)
+    {
+        this.size = size;
     }
 
 }
