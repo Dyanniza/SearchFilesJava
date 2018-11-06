@@ -24,7 +24,7 @@ public class Convertor
     public String converToStringWithFormat(long datef)
     {
         Date d = new Date(datef);
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String sdate=df.format(d);
         return sdate;
     }
@@ -34,11 +34,33 @@ public class Convertor
      * Description: This method will return a double value that represent the bytes of the size passed
      */
 
-    public double converToBytes(String sizef)
+    public double converToBytes(int sizef,String oper)
     {
-        return 0;
-    }
+        double res=1.0;
+        if(oper=="KB")
+        {
+            res=sizef*1024;
 
+        }else
+        {
+            if(oper=="MB")
+            {
+                res=sizef*(1024*1024);
+            }else
+            {
+                if(oper=="GB")
+                {
+                    res=sizef*(1024*1024*1024);
+                }
+
+            }
+        }
+        return res;
+    }
+    /*
+     * Method:converBooleanToString
+     * Description: This method will return an String that represent the value given by the view
+     */
     public String converBooleanToString(Boolean boolValue)
     {
         String res;

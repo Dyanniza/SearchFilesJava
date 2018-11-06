@@ -55,10 +55,10 @@ public class Controller
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
         fCriteria.setExt(searchC.getPanel().getExtension());
-       // fCriteria.setModDate(searchC.getPanel().getModifiedDate());
-      //  fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
-       // fCriteria.setAccDate(searchC.getPanel().getAccessDate());
-       // fCriteria.setFsize(searchC.getPanel().getFileSize());
+        //fCriteria.setModDate(searchC.getPanel().getModifiedDate());
+        //fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
+        //fCriteria.setAccDate(searchC.getPanel().getAccessDate());
+       // fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize(),"MB"));
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
         fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
        // fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
