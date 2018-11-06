@@ -8,6 +8,7 @@
  */
 package com.search.view;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +28,7 @@ public class MainWindow extends JFrame
 
     public void settings()
     {
+        setIconImage((new ImageIcon("resources/Images/filefind.png") ).getImage());
         setTitle("SearchC  - File searcher");
         setSize(1000,800);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

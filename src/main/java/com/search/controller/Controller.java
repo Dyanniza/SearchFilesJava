@@ -15,8 +15,6 @@ import com.search.utils.Convertor;
 
 import com.search.view.PanelSearchParameters;
 
-
-import javax.swing.*;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;

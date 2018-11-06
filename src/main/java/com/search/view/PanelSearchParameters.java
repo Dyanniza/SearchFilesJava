@@ -106,6 +106,9 @@ public class PanelSearchParameters extends JPanel{
         extension = new JTextField(20);
         fileSize = new JFormattedTextField();
         buttonSearch = new JButton("Search");
+        buttonSearch.setEnabled(false);
+        new Thread(target).start();
+        disableAction();
         buttonChooser = new JButton("Select Path");
         fileChooser = new JFileChooser("c:/");
         dateModelM = new UtilDateModel();
@@ -155,7 +158,7 @@ public class PanelSearchParameters extends JPanel{
         panelFieldNames.add(labelSelectedCDate);
         panelFieldNames.add(labelSize);
         panelFieldNames.add(empty);
-        panelFieldNames.add(labelKind);
+
         panelFieldNames.add(labelAdvancedOptions);
 
         panelInputFields.setLayout(new GridLayout(15,0));
@@ -168,7 +171,7 @@ public class PanelSearchParameters extends JPanel{
         panelInputFields.add(fileSize);
 
         panelInputFields.add(comboFileSize);
-        panelInputFields.add(comboFileKind);
+
         panelInputFields.add(checkBoxHidden);
         panelInputFields.add(checkBoxDirectory);
         panelInputFields.add(checkBoxReadOnly);
@@ -199,6 +202,47 @@ public class PanelSearchParameters extends JPanel{
             }
         });
     }
+    public void disableAction()
+    {
+        textPath.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(e.getActionCommand().equalsIgnoreCase("Enable"))
+                {
+                    buttonSearch.setEnabled(true);
+                }
+                else if (e.getActionCommand().equalsIgnoreCase("Disable"))
+                {
+                    buttonSearch.setEnabled(false);
+                }
+
+            }
+        });
+    }
+    final Runnable target = new Runnable() {
+        @Override
+        public void run() {
+            while (true)
+            {
+                final ActionListener[] listeners = textPath.getActionListeners();
+                for (ActionListener listener: listeners)
+                {
+                    if (textPath.getText().trim().length() > 0)
+                    {
+                        final ActionEvent event = new ActionEvent(textPath,1,"Enable");
+                        listener.actionPerformed(event);
+                    }
+                    else
+                        {
+                            final ActionEvent event = new ActionEvent(textPath,1,"Disable");
+                            listener.actionPerformed(event);
+                        }
+                }
+            }
+        }
+    };
+
     public void getSelectedPath()
     {
         String path;
