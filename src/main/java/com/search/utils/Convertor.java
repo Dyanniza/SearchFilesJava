@@ -31,8 +31,11 @@ public class Convertor
 
     public String converDateToStringWithFormat(Date fdate)
     {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String newDate=df.format(fdate.toString());
+       DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+       System.out.print(df);
+       String newDate=df.format(fdate.toString());
+       // String newDate=fdate.toString();
+        System.out.print(newDate + "convertor");
         return newDate;
     }
     /*
