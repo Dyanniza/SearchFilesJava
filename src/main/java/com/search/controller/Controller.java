@@ -14,11 +14,12 @@ import com.search.view.MainWindow;
 import com.search.utils.Convertor;
 
 import com.search.view.PanelSearchParameters;
-
+import javax.swing.JOptionPane;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
+
 
 public class Controller
 {
@@ -68,12 +69,12 @@ public class Controller
         
         searchC.getTableModel().setRowCount(0);
 
-       /* if(filesR.isEmpty()||filesR==null||filesR.size() == 0 )
+       if(filesR.isEmpty()||filesR==null||filesR.size() == 0 )
         {
             JOptionPane.showMessageDialog(null,"Search Results:\n" + " No files found");
 
         }else
-        {*/
+        {
             for(Asset fresult: filesR)
             {
                 //if(filesR instanceof FileResult)
@@ -90,10 +91,10 @@ public class Controller
                 //String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
                 String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
                 this.searchC.getTableModel().addRow(dataresult);
-                //}
-
             }
-       //
+
+        }
+
         filesR.clear();
     }
 }

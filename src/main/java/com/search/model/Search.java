@@ -70,15 +70,23 @@ public class Search
                                    // fr.setAccessDate(accDate);
                                     fr.setHidden(f.isHidden());
                                     fr.setReadOnly(!f.canWrite());
-                                    if(criteria.getFHidden()==false && criteria.getFReadOnly()==false)
-                                    {
+                            if (criteria.getFHidden() == false && criteria.getFReadOnly() == false) {
+                                result.add(fr);
+                            } else {
+                                if ((criteria.getFHidden() == true) && (criteria.getFReadOnly() == false))
+                                    if (f.isHidden())
                                         result.add(fr);
-                                    } else
-                                    {
-                                        if((f.isHidden()==criteria.getFHidden())&&(!f.canWrite()==criteria.getFReadOnly()))
-                                            result.add(fr);
-                                 }
-                              //  }
+                                if ((criteria.getFHidden() == false) && (criteria.getFReadOnly() == true))
+                                    if (!f.canWrite())
+                                        result.add(fr);
+                                if ((criteria.getFHidden() == true) && (criteria.getFReadOnly() == true))
+                                    if (!f.canWrite() && f.isHidden())
+                                        result.add(fr);
+
+                            }
+
+
+                        //  }
                            // }
                         }
                     }
@@ -88,8 +96,5 @@ public class Search
 
         return result;
     }
-    public void searchFilename(Criteria criteria)
-    {
 
-    }
 }
