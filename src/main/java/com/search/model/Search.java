@@ -55,19 +55,19 @@ public class Search
                         if (criteria.getFileName().isEmpty() || onlyFileName.contains(criteria.getFileName())) {
                             BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
                             FileTime modDate = attrs.lastModifiedTime();
-                            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                             String modifiedDate = df.format(modDate.toMillis());
 
                             if ((criteria.getModDate().isEmpty()) || (modifiedDate.equals(criteria.getModDate()))) {
                                 FileTime creDate = attrs.creationTime();
-                                SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                                //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                                 String createdDate = df.format(creDate.toMillis());
                                 if ((criteria.getCreDate().isEmpty()) || (createdDate.equals(criteria.getCreDate()))) {
                                     FileTime accDate = attrs.lastAccessTime();
-                                    SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                                  //  SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                                     String accessDate = df.format(accDate.toMillis());
                                     if ((criteria.getAccDate().isEmpty()) || (accessDate.equals(criteria.getAccDate()))) {
-                                        if((criteria.getFsize().toString().isEmpty()) || (f.length() <= criteria.getFsize())) {
+                                      //  if((criteria.getFsize().toString().isEmpty()) || (f.length() <= criteria.getFsize())) {
                                             Asset fr = new Asset();
                                             fr.setPath(f.getPath());
                                             fr.setFileName(onlyFileName);
@@ -99,7 +99,7 @@ public class Search
                             }
                         }
                     }
-                }
+                //}
                 catch (IOException e) {
                     e.printStackTrace();
                 }

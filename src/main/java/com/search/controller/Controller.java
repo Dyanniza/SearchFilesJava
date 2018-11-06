@@ -24,7 +24,6 @@ public class Controller
 {
     private MainWindow searchC;
     private Search search;
-    //private Asset asset;
     private Criteria fCriteria;
 
     /*
@@ -55,9 +54,9 @@ public class Controller
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
         fCriteria.setExt(searchC.getPanel().getExtension());
-        //fCriteria.setModDate(searchC.getPanel().getModifiedDate());
-        //fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
-        //fCriteria.setAccDate(searchC.getPanel().getAccessDate());
+        fCriteria.setModDate(confile.converDateToStringWithFormat(searchC.getPanel().getModifiedDate()));
+        fCriteria.setCreDate(confile.converDateToStringWithFormat(searchC.getPanel().getCreatedDate()));
+        fCriteria.setAccDate(confile.converDateToStringWithFormat(searchC.getPanel().getAccessDate()));
        // fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize(),"MB"));
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
         fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
@@ -76,25 +75,21 @@ public class Controller
         {*/
             for(Asset fresult: filesR)
             {
-                //if(filesR instanceof FileResult)
-                //{
+                String sPath = fresult.getPath();
+                String sFileName = fresult.getFileName();
+                String sExtension = fresult.getExt();
+                String mDate=fresult.getModifiedDate();
+                String aDate=fresult.getAccessDate();
+                String cDate=fresult.getCreatedDate();
+                String sHidden=confile.converBooleanToString(fresult.getHidden());
+                String sReadOnly=confile.converBooleanToString(fresult.getReadOnly());
 
-                String spath = fresult.getPath();
-                String sfilename = fresult.getFileName();
-                String sextension = fresult.getExt();
-                String sdate=confile.converToStringWithFormat(fresult.getModifiedDate());
-                String shidden=confile.converBooleanToString(fresult.getHidden());
-                String sreadonly=confile.converBooleanToString(fresult.getReadOnly());
 
-
-                //String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
-                String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
+                String[] dataresult= {sPath,sFileName,sExtension,mDate,aDate,cDate,sHidden,sReadOnly};
                 this.searchC.getTableModel().addRow(dataresult);
-                //}
-
-            }
-       //
+          //  }
         filesR.clear();
+        }
     }
 }
 

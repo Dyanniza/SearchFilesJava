@@ -29,14 +29,20 @@ public class Convertor
         return sdate;
     }
 
+    public String converDateToStringWithFormat(Date fdate)
+    {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String newDate=df.format(fdate.toString());
+        return newDate;
+    }
     /*
      * Method:converToBytes
      * Description: This method will return a double value that represent the bytes of the size passed
      */
 
-    public double converToBytes(int sizef,String oper)
+    public long converToBytes(int sizef,String oper)
     {
-        double res=1.0;
+        long res=0;
         if(oper=="KB")
         {
             res=sizef*1024;

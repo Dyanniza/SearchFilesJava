@@ -30,7 +30,7 @@ public class MainWindow extends JFrame
     {
         setIconImage((new ImageIcon("resources/Images/filefind.png") ).getImage());
         setTitle("SearchC  - File searcher");
-        setSize(1000,800);
+        setSize(1200,1000);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
