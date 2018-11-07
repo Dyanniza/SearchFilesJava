@@ -74,6 +74,7 @@ public class Search {
                                             fr.setPath(f.getPath());
                                             fr.setFileName(onlyFileName);
                                             fr.setExt(onlyFileExtension);
+                                            fr.setSize(f.length());
                                             fr.setModifiedDate(modDate);
                                             fr.setCreatedDate(creDate);
                                             fr.setAccessDate(accDate);
@@ -81,7 +82,15 @@ public class Search {
                                             fr.setReadOnly(!f.canWrite());
                                             if (criteria.getFHidden() == false && criteria.getFReadOnly() == false)
                                              {
-                                                result.add(fr);
+                                                switch (criteria.getFoperator()){
+                                                    case 0: if (criteria.getFsize()==f.length())
+                                                                result.add(fr);
+                                                    case 1: if (criteria.getFsize()< f.length())
+                                                                result.add(fr);
+                                                    case 2: if (criteria.getFsize()> f.length())
+                                                                result.add(fr);
+                                                }
+                                                // result.add(fr);
                                              } else
                                                 {
                                                     if ((criteria.getFHidden() == true) && (criteria.getFReadOnly() == false))
