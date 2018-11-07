@@ -17,9 +17,9 @@ public class Criteria
     private String fileName;
     private String ext;
     private long moddate;
-    private Date accdate;
-    private Date credate;
-    private int fsize;
+    private long accdate;
+    private long credate;
+    private long fsize;
     private boolean fhidden;
     private boolean freadonly;
     private boolean fonlydir;
@@ -54,10 +54,9 @@ public class Criteria
         return this.ext;
     }
 
-    public void setModDate(Date datev)
+    public void setModDate(long datev)
     {
-        //this.moddate = datev;
-        this.moddate = 118150020;
+        this.moddate = datev;
     }
 
     public long getModDate()
@@ -65,32 +64,32 @@ public class Criteria
         return this.moddate;
     }
 
-    public void setAccDate(Date datea)
+    public void setAccDate(long datea)
     {
         this.accdate = datea;
     }
 
-    public Date getAccDate()
+    public long getAccDate()
     {
         return this.accdate;
     }
 
-    public void setCreDate(Date datec)
+    public void setCreDate(long datec)
     {
         this.credate = datec;
     }
 
-    public Date getCreDate()
+    public long getCreDate()
     {
         return this.credate;
     }
 
-    public void setFsize(int size)
+    public void setFsize(long size)
     {
         this.fsize = size;
     }
 
-    public int getFsize()
+    public long getFsize()
     {
         return this.fsize;
     }
