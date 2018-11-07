@@ -20,6 +20,7 @@ public class Criteria
     private long accdate;
     private long credate;
     private long fsize;
+    private int foperator;
     private boolean fhidden;
     private boolean freadonly;
     private boolean fonlydir;
@@ -92,6 +93,16 @@ public class Criteria
     public long getFsize()
     {
         return this.fsize;
+    }
+
+    public void setFoperator(int operator)
+    {
+        this.foperator = operator;
+    }
+
+    public long getFoperator()
+    {
+        return this.foperator;
     }
 
     public void setFHidden(boolean hidden)

@@ -54,8 +54,14 @@ public class Convertor
 
     public long converToBytes(int sizef)
     {
-        long res=sizef*1024;
-        return res;
+        if(sizef!=0)
+        {
+            long res=sizef*1024;
+            return res;
+        }else
+        {
+            return 0;
+        }
     }
     /*
      * Method:converBooleanToString
