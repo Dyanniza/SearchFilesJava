@@ -36,8 +36,16 @@ public class Convertor
 
     public long converDateToLong (Date datef)
     {
-       long longDate=datef.getTime();
-       return longDate;
+        if(datef!=null)
+        {
+            long longDate=datef.getTime();
+            return longDate;
+        }else
+        {
+            return 0;
+        }
+
+
     }
     /*
      * Method:converToBytes

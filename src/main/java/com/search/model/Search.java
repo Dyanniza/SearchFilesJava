@@ -16,18 +16,15 @@ import java.nio.file.Files;
 import java.nio.file.attribute.FileTime;
 import com.search.controller.Criteria;
 import com.search.model.Asset;
+import java.io.IOException;
 
-
-public class Search
-{
+public class Search {
     private List<Asset> result = new ArrayList();
 
-    public Search()
-    {
+    public Search() {
     }
 
     /**
-     *
      * @param criteria
      * @return
      */
@@ -37,61 +34,61 @@ public class Search
         String fileN;
         String onlyFileName;
         String onlyFileExtension;
-        int modDate;
+        int modificationDate;
 
         for (File f : fileList) {
             // If f is directory the method is called again with the path
-            if (criteria.getFIsDirectory()==false){
-            if (f.isDirectory()) {
-                criteria.setPath(f.getPath());
-                initSearch(criteria);
-            } else {
-                fileN = f.getName();
-                onlyFileName=fileN.substring(0,fileN.lastIndexOf('.'));
-                onlyFileExtension=fileN.substring(fileN.lastIndexOf('.'),fileN.length());
-                // If filename is empty or filename found is equal to the parameter given the
-                // path and file name is added to the result
+            if (criteria.getFIsDirectory() == false) {
+                if (f.isDirectory()) {
+                    criteria.setPath(f.getPath());
+                    initSearch(criteria);
+                } else {
+                    try {
+                        fileN = f.getName();
+                        onlyFileName = fileN.substring(0, fileN.lastIndexOf('.'));
+                        onlyFileExtension = fileN.substring(fileN.lastIndexOf('.'), fileN.length());
+                        // If filename is empty or filename found is equal to the parameter given the
+                        // path and file name is added to the result
 
-                if (fileN.endsWith(criteria.getExt()) || criteria.getExt().isEmpty())
-                {
-                    if (criteria.getFileName().isEmpty() || onlyFileName.contains(criteria.getFileName()))
-                    {
-                        modDate= Long.compare(f.lastModified(),criteria.getModDate());
-                        if ((criteria.getModDate()==0) || (modDate==0))
-                        {
-                           // BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
-                           // FileTime creDate = attrs.creationTime();
-                           // if ((criteria.getCreDate().toString()).isEmpty() || creDate.compareTo(criteria.getCreDate()))
-                           // {
-                            //    FileTime accDate = attrs.lastAccessTime();
-                              //  if ((criteria.getAccDate().toString()).isEmpty() || accDate.compareTo(criteria.getAccDate()))
-                               // {
+                        if (fileN.endsWith(criteria.getExt()) || criteria.getExt().isEmpty()) {
+                            if (criteria.getFileName().isEmpty() || onlyFileName.contains(criteria.getFileName())) {
+                                BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+                                long modDate = attrs.lastModifiedTime().toMillis();
+                                modificationDate = Long.compare(modDate, criteria.getModDate());
+                                if ((Long.valueOf(criteria.getModDate()) == 0) || (modificationDate <= 0)) {
+                                    //BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+                                    // long creDate = attrs.creationTime();
+                                    // if ((criteria.getCreDate().toString()).isEmpty() || creDate.compareTo(criteria.getCreDate()))
+                                    // {
+                                    //    FileTime accDate = attrs.lastAccessTime();
+                                    //  if ((criteria.getAccDate().toString()).isEmpty() || accDate.compareTo(criteria.getAccDate()))
+                                    // {
                                     Asset fr = new Asset();
                                     fr.setPath(f.getPath());
                                     fr.setFileName(onlyFileName);
                                     fr.setExt(onlyFileExtension);
                                     fr.setModifiedDate(f.lastModified());
-                                  //  fr.setCreatedDate(creDate);
-                                   // fr.setAccessDate(accDate);
+                                    //  fr.setCreatedDate(creDate);
+                                    // fr.setAccessDate(accDate);
                                     fr.setHidden(f.isHidden());
                                     fr.setReadOnly(!f.canWrite());
-                                    if(criteria.getFHidden()==false && criteria.getFReadOnly()==false)
-                                    {
+                                    if (criteria.getFHidden() == false && criteria.getFReadOnly() == false) {
                                         result.add(fr);
-                                    } else
-                                    {
-                                        if((f.isHidden()==criteria.getFHidden())&&(!f.canWrite()==criteria.getFReadOnly()))
+                                    } else {
+                                        if ((f.isHidden() == criteria.getFHidden()) && (!f.canWrite() == criteria.getFReadOnly()))
                                             result.add(fr);
-                                 }
-                              //  }
-                           // }
+                                    }
+                                    //  }
+                                    // }
+                                }
+                            }
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
-            }
-        }else
-            {
-                if (f.isDirectory()){
+            } else {
+                if (f.isDirectory()) {
                     criteria.setPath(f.getPath());
                     initSearch(criteria);
                     Asset fr = new Asset();
@@ -109,9 +106,5 @@ public class Search
         }
 
         return result;
-    }
-    public void searchFilename(Criteria criteria)
-    {
-
     }
 }
