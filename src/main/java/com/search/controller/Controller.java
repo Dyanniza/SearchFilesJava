@@ -12,20 +12,19 @@ import com.search.model.Search;
 import com.search.model.Asset;
 import com.search.view.MainWindow;
 import com.search.utils.Convertor;
+import javax.swing.JOptionPane;
 
 import com.search.view.PanelSearchParameters;
-import javax.swing.JOptionPane;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
 
-
 public class Controller
 {
     private MainWindow searchC;
     private Search search;
-    //private Asset asset;
     private Criteria fCriteria;
 
     /*
@@ -41,7 +40,6 @@ public class Controller
 
     }
 
-
     /*
      * Method:getCriteriaView
      * Description: This method will return the actions from the view and the model packages. On view will capture the
@@ -56,20 +54,19 @@ public class Controller
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
         fCriteria.setExt(searchC.getPanel().getExtension());
-       // fCriteria.setModDate(searchC.getPanel().getModifiedDate());
-      //  fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
-       // fCriteria.setAccDate(searchC.getPanel().getAccessDate());
-       // fCriteria.setFsize(searchC.getPanel().getFileSize());
+        //fCriteria.setModDate(searchC.getPanel().getModifiedDate());
+        //fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
+        //fCriteria.setAccDate(searchC.getPanel().getAccessDate());
+       // fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize(),"MB"));
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
         fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
        // fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
-
 
         List<Asset> filesR=search.initSearch(fCriteria);
         
         searchC.getTableModel().setRowCount(0);
 
-       if(filesR.isEmpty()||filesR==null||filesR.size() == 0 )
+        if(filesR.isEmpty()||filesR==null||filesR.size() == 0 )
         {
             JOptionPane.showMessageDialog(null,"Search Results:\n" + " No files found");
 
@@ -77,19 +74,15 @@ public class Controller
         {
             for(Asset fresult: filesR)
             {
-                //if(filesR instanceof FileResult)
-                //{
-
-                String spath = fresult.getPath();
-                String sfilename = fresult.getFileName();
-                String sextension = fresult.getExt();
-                String sdate=confile.converToStringWithFormat(fresult.getModifiedDate());
-                String shidden=confile.converBooleanToString(fresult.getHidden());
-                String sreadonly=confile.converBooleanToString(fresult.getReadOnly());
+                String sPath = fresult.getPath();
+                String sFilename = fresult.getFileName();
+                String sExtension = fresult.getExt();
+                String mDate=confile.converToStringWithFormat(fresult.getModifiedDate());
+                String sHidden=confile.converBooleanToString(fresult.getHidden());
+                String sReadonly=confile.converBooleanToString(fresult.getReadOnly());
 
 
-                //String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
-                String[] dataresult= {spath,sfilename,sextension,sdate,shidden,sreadonly};
+                String[] dataresult= {sPath,sFilename,sExtension,mDate,sHidden,sReadonly};
                 this.searchC.getTableModel().addRow(dataresult);
             }
 
