@@ -9,8 +9,8 @@ public class Asset
     private String fileName;
     private String ext;
     private long mDate;
-    private FileTime cDate;
-    private FileTime aDate;
+    private long cDate;
+    private long aDate;
     private boolean hidden;
     private boolean readOnly;
 
@@ -58,22 +58,22 @@ public class Asset
         this.mDate = mDate;
     }
 
-    public FileTime getCreatedDate()
+    public long getCreatedDate()
     {
         return this.cDate;
     }
 
-    public void setCreatedDate(FileTime cDate)
+    public void setCreatedDate(long cDate)
     {
         this.cDate = cDate;
     }
 
-    public FileTime getAccessDate()
+    public long getAccessDate()
     {
         return this.aDate;
     }
 
-    public void setAccessDate(FileTime aDate)
+    public void setAccessDate(long aDate)
     {
         this.aDate = aDate;
     }

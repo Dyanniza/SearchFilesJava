@@ -35,74 +35,103 @@ public class Search {
         String onlyFileName;
         String onlyFileExtension;
         int modificationDate;
+        int creationDate;
+        int accessDate;
 
-        for (File f : fileList) {
-            // If f is directory the method is called again with the path
-            if (criteria.getFIsDirectory() == false) {
-                if (f.isDirectory()) {
+        for (File f : fileList)
+        {
+            if (criteria.getFIsDirectory() == false)
+            {
+                if (f.isDirectory())
+                {
                     criteria.setPath(f.getPath());
                     initSearch(criteria);
-                } else {
-                    try {
+                } else
+                    {
+                      try
+                      {
                         fileN = f.getName();
                         onlyFileName = fileN.substring(0, fileN.lastIndexOf('.'));
                         onlyFileExtension = fileN.substring(fileN.lastIndexOf('.'), fileN.length());
-                        // If filename is empty or filename found is equal to the parameter given the
-                        // path and file name is added to the result
-
-                        if (fileN.endsWith(criteria.getExt()) || criteria.getExt().isEmpty()) {
-                            if (criteria.getFileName().isEmpty() || onlyFileName.contains(criteria.getFileName())) {
+                        if (fileN.endsWith(criteria.getExt()) || criteria.getExt().isEmpty())
+                        {
+                            if (criteria.getFileName().isEmpty() || onlyFileName.contains(criteria.getFileName()))
+                            {
                                 BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
                                 long modDate = attrs.lastModifiedTime().toMillis();
                                 modificationDate = Long.compare(modDate, criteria.getModDate());
-                                if ((Long.valueOf(criteria.getModDate()) == 0) || (modificationDate <= 0)) {
-                                    //BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
-                                    // long creDate = attrs.creationTime();
-                                    // if ((criteria.getCreDate().toString()).isEmpty() || creDate.compareTo(criteria.getCreDate()))
-                                    // {
-                                    //    FileTime accDate = attrs.lastAccessTime();
-                                    //  if ((criteria.getAccDate().toString()).isEmpty() || accDate.compareTo(criteria.getAccDate()))
-                                    // {
-                                    Asset fr = new Asset();
-                                    fr.setPath(f.getPath());
-                                    fr.setFileName(onlyFileName);
-                                    fr.setExt(onlyFileExtension);
-                                    fr.setModifiedDate(f.lastModified());
-                                    //  fr.setCreatedDate(creDate);
-                                    // fr.setAccessDate(accDate);
-                                    fr.setHidden(f.isHidden());
-                                    fr.setReadOnly(!f.canWrite());
-                                    if (criteria.getFHidden() == false && criteria.getFReadOnly() == false) {
-                                        result.add(fr);
-                                    } else {
-                                        if ((f.isHidden() == criteria.getFHidden()) && (!f.canWrite() == criteria.getFReadOnly()))
-                                            result.add(fr);
+                                if ((Long.valueOf(criteria.getModDate()) == 0) || (modificationDate <= 0))
+                                {
+                                    long creDate = attrs.creationTime().toMillis();
+                                    creationDate = Long.compare(creDate, criteria.getCreDate());
+                                    if ((Long.valueOf(criteria.getCreDate()) == 0) || (creationDate <= 0))
+                                    {
+                                        long accDate = attrs.lastAccessTime().toMillis();
+                                        accessDate = Long.compare(accDate, criteria.getAccDate());
+                                        if ((Long.valueOf(criteria.getCreDate()) == 0) || (accessDate <= 0))
+                                        {
+                                            Asset fr = new Asset();
+                                            fr.setPath(f.getPath());
+                                            fr.setFileName(onlyFileName);
+                                            fr.setExt(onlyFileExtension);
+                                            fr.setModifiedDate(modDate);
+                                            fr.setCreatedDate(creDate);
+                                            fr.setAccessDate(accDate);
+                                            fr.setHidden(f.isHidden());
+                                            fr.setReadOnly(!f.canWrite());
+                                            if (criteria.getFHidden() == false && criteria.getFReadOnly() == false)
+                                             {
+                                                result.add(fr);
+                                             } else
+                                                {
+                                                    if ((criteria.getFHidden() == true) && (criteria.getFReadOnly() == false))
+                                                        if (f.isHidden())
+                                                            result.add(fr);
+                                                    if ((criteria.getFHidden() == false) && (criteria.getFReadOnly() == true))
+                                                         if (!f.canWrite())
+                                                            result.add(fr);
+                                                    if ((criteria.getFHidden() == true) && (criteria.getFReadOnly() == true))
+                                                        if (!f.canWrite() && f.isHidden())
+                                                             result.add(fr);
+
+                                                }
+                                        }
                                     }
-                                    //  }
-                                    // }
                                 }
                             }
                         }
-                    } catch (IOException e) {
+                      } catch (IOException e)
+                       {
                         e.printStackTrace();
+                       }
                     }
+            } else
+                {
+                  if (f.isDirectory())
+                  {
+                      criteria.setPath(f.getPath());
+                      initSearch(criteria);
+                      try
+                      {
+                          BasicFileAttributes attrs = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+                          long modDate = attrs.lastModifiedTime().toMillis();
+                          long creDate = attrs.creationTime().toMillis();
+                          long accDate = attrs.lastAccessTime().toMillis();
+                          Asset fr = new Asset();
+                          fr.setPath(f.getPath());
+                          fr.setFileName(f.getName());
+                          fr.setModifiedDate(modDate);
+                          fr.setCreatedDate(creDate);
+                          fr.setAccessDate(accDate);
+                          fr.setHidden(f.isHidden());
+                          fr.setReadOnly(!f.canWrite());
+                          result.add(fr);
+                      } catch (IOException e)
+                         {
+                           e.printStackTrace();
+                         }
+                  }
                 }
-            } else {
-                if (f.isDirectory()) {
-                    criteria.setPath(f.getPath());
-                    initSearch(criteria);
-                    Asset fr = new Asset();
-                    fr.setPath(f.getPath());
-                    fr.setFileName(f.getName());
-                    fr.setModifiedDate(f.lastModified());
-                    //  fr.setCreatedDate(creDate);
-                    // fr.setAccessDate(accDate);
-                    fr.setHidden(f.isHidden());
-                    fr.setReadOnly(!f.canWrite());
-                    result.add(fr);
-
-                }
-            }
         }
 
         return result;
