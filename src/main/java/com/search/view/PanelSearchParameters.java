@@ -70,7 +70,7 @@ public class PanelSearchParameters extends JPanel{
     private JDatePickerImpl datePickerM;
     private JDatePickerImpl datePickerA;
     private JDatePickerImpl datePickerC;
-    private JComboBox comboFileSize;
+    private JComboBox comboFileOperator;
     private JComboBox comboFileKind;
     private JCheckBox checkBoxHidden;
     private JCheckBox checkBoxDirectory;
@@ -84,6 +84,7 @@ public class PanelSearchParameters extends JPanel{
         //searchAction();
         setPathChooser();
         getModifiedDate();
+        setSelectSizeOperator();
     }
 
     public void settings()
@@ -135,7 +136,7 @@ public class PanelSearchParameters extends JPanel{
         datePickerM = new JDatePickerImpl(datePanelM, new DateComponentFormatter());
         datePickerA = new JDatePickerImpl(datePanelA, new DateComponentFormatter());
         datePickerC = new JDatePickerImpl(datePanelC, new DateComponentFormatter());
-        comboFileSize = new JComboBox(setSizeList());
+        comboFileOperator = new JComboBox(setSizeOperator());
         comboFileKind = new JComboBox(setKindList());
         checkBoxHidden = new JCheckBox("Hidden fields?", false);
         checkBoxDirectory = new JCheckBox("Directory Only?", false);
@@ -168,9 +169,8 @@ public class PanelSearchParameters extends JPanel{
         panelInputFields.add(datePickerM);
         panelInputFields.add(datePickerA);
         panelInputFields.add(datePickerC);
+        panelInputFields.add(comboFileOperator);
         panelInputFields.add(fileSize);
-
-        panelInputFields.add(comboFileSize);
 
         panelInputFields.add(checkBoxHidden);
         panelInputFields.add(checkBoxDirectory);
@@ -319,17 +319,13 @@ public class PanelSearchParameters extends JPanel{
         numFileSize = Integer.parseInt(sFileSize);
         return numFileSize;
     }
-    public void requirePath()
-    {
-        labelPath.setForeground(Color.RED);
-    }
-    public String[] setSizeList()
+
+    public String[] setSizeOperator()
     {
         String[] sizeList = new String[4];
-        sizeList [0] = "Clear";
-        sizeList [1] = " KB ";
-        sizeList [2] = " MB ";
-        sizeList [3] = " GB ";
+        sizeList [0] = "Equals";
+        sizeList [1] = "Greater than";
+        sizeList [2] = "Less than";
         return sizeList;
     }
 
@@ -347,9 +343,9 @@ public class PanelSearchParameters extends JPanel{
         return kindList;
     }
 
-    public JComboBox getComboFileSize()
+    public JComboBox getComboFileOperator()
     {
-        return comboFileSize;
+        return comboFileOperator;
     }
     public boolean getIfHidden()
     {
@@ -363,5 +359,42 @@ public class PanelSearchParameters extends JPanel{
     {
         return checkBoxReadOnly.isSelected();
     }
+
+    public int getSelectedSizeOperator()
+    {
+        int operator;
+        String selectedOperator = (String)comboFileOperator.getSelectedItem();
+        System.out.println(selectedOperator);
+
+
+        switch (selectedOperator)
+        {
+            case "Equals":
+                operator = 0;
+            case "Greater than":
+                operator = 1;
+            case "Less than":
+                operator = 2;
+                break;
+                default:
+                    operator = 0;
+                    System.out.println("Empty Operator");
+        }
+        System.out.println(operator);
+        return operator;
+
+    }
+
+     public void setSelectSizeOperator()
+     {
+         comboFileOperator.addActionListener(new ActionListener() {
+                                                 @Override
+                                                 public void actionPerformed(ActionEvent e) {
+                                                     getSelectedSizeOperator();
+                                                 }
+                                             }
+
+         );
+     }
 
 }
