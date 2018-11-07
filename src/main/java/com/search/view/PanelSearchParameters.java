@@ -6,7 +6,12 @@
  * You shall not disclose such Confidential Information and shall use it only in accordance with the terms
  * of the license agreement you entered into  with Jalasoft.
  */
-
+/**
+ * Description: JPanel class that contains, configure, initialize and set action
+ * events for the Search parameters fields
+ * @version 1.0
+ * @autor Cecilia Chalar
+ */
 package com.search.view;
 
 import org.jdatepicker.impl.DateComponentFormatter;
@@ -24,7 +29,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -86,7 +90,9 @@ public class PanelSearchParameters extends JPanel{
         getModifiedDate();
         setSelectSizeOperator();
     }
-
+    /**
+     * Set initial values  and configurations for each component
+     */
     public void settings()
     {
         setBorder(BorderFactory.createTitledBorder("Search Parameters"));
@@ -147,7 +153,10 @@ public class PanelSearchParameters extends JPanel{
         panelUp = new JPanel();
         panelButtons = new JPanel();
     }
-
+    /**
+     * Configure the Field names and input  fields  panels in 2 columns
+     * Add fields and buttons to  panels
+     */
     public void init()
     {
         panelFieldNames.setLayout(new GridLayout(15,0));
@@ -202,6 +211,14 @@ public class PanelSearchParameters extends JPanel{
             }
         });
     }
+
+    /**
+     * Method: disableAction()
+     * Add action listener to a text field: Path,  if text field is empty, Search button is disabled,
+     * if text field is not empty, Search button is enabled
+     * @param
+     * @return
+     */
     public void disableAction()
     {
         textPath.addActionListener(new ActionListener() {
@@ -216,7 +233,6 @@ public class PanelSearchParameters extends JPanel{
                 {
                     buttonSearch.setEnabled(false);
                 }
-
             }
         });
     }
@@ -243,6 +259,10 @@ public class PanelSearchParameters extends JPanel{
         }
     };
 
+    /**
+     * Add setting for the 'File chooser', confugure to  select and display only directories.
+     * Set the selected path to 'Path' text
+     */
     public void getSelectedPath()
     {
         String path;
@@ -258,7 +278,9 @@ public class PanelSearchParameters extends JPanel{
             textPath.setText(path);
         }
     }
-
+    /**
+     * add an action listener to 'Select Path' button nad calls to getSelectedPath() method
+     */
     public  void setPathChooser()
     {
         buttonChooser.addActionListener(new ActionListener(){
@@ -273,13 +295,19 @@ public class PanelSearchParameters extends JPanel{
     {
         return this;
     }
-
+    /**
+     * @return JButton Search with all configured properties
+     */
     public JButton getButtonSearch()
     {
         System.out.println("On View" );
         return this.buttonSearch;
     }
-
+    /**
+     * Methods: getPAtch(), getFileName() and getExtension()
+     * Description: Obtain values  of  text fields File Name and Extension
+     * @return String
+     */
     public String getPath()
     {
         return textPath.getText();
@@ -295,10 +323,16 @@ public class PanelSearchParameters extends JPanel{
         return extension.getText();
     }
 
+    /**
+     * Methods: getModifiedDate(), getAccessDate() and getCreatedDate()
+     * Description: get the selected value of date picked in Date format and convert to a String
+     * @param
+     * @return String  date
+     */
     public Date getModifiedDate()
     {
         Date selectedDate = (Date) datePickerM.getModel().getValue();
-        System.out.println(selectedDate);
+        System.out.println("MDate - view:" + selectedDate);
         return selectedDate;
     }
     public Date getAccessDate()
@@ -313,13 +347,21 @@ public class PanelSearchParameters extends JPanel{
         System.out.println(selectedDate);
         return selectedDate;
     }
+    /**
+     * Get the value selected in Size text field and convert values to an integer
+     * @return int with values selected on size
+     */
     public int getFileSize()
     {   int numFileSize;
         String sFileSize = fileSize.getText();
         numFileSize = Integer.parseInt(sFileSize);
         return numFileSize;
     }
-
+    /**
+     * Set the items list for Size operator combo box list
+     * @param
+     * @return String[] an array of Strings in list items to fill the combo box
+     */
     public String[] setSizeOperator()
     {
         String[] sizeList = new String[4];
@@ -328,7 +370,11 @@ public class PanelSearchParameters extends JPanel{
         sizeList [2] = "Less than";
         return sizeList;
     }
-
+    /**
+     * Set the items list fot a combo box list
+     * @param
+     * @return String[] an array of Strings in list items to fill the combo box
+     */
     public String[] setKindList()
     {
         String[] kindList = new String[8];
@@ -342,11 +388,10 @@ public class PanelSearchParameters extends JPanel{
         kindList [7] = "unknown";
         return kindList;
     }
-
-    public JComboBox getComboFileOperator()
-    {
-        return comboFileOperator;
-    }
+    /**
+     * getIf ... methods get the advanced search options: Hidden, Only directories and read Only
+     * @return boolean true if option is selected and false if option is not selected
+     */
     public boolean getIfHidden()
     {
         return checkBoxHidden.isSelected();
@@ -359,33 +404,33 @@ public class PanelSearchParameters extends JPanel{
     {
         return checkBoxReadOnly.isSelected();
     }
-
+    /**
+     * Get the selected item list from combo box: comboFileOperator, the default selection is Equals
+     * @return int 0,1,2 where 0 means "Equals", 1: "Grater than" and 2: "Less than"
+     */
     public int getSelectedSizeOperator()
     {
-        int operator;
         String selectedOperator = (String)comboFileOperator.getSelectedItem();
-        System.out.println(selectedOperator);
-
-
-        switch (selectedOperator)
+        System.out.println("SizeOperator - view:" + selectedOperator);
+        final int e = 0;
+        final int g = 1;
+        final int t = 2;
+        if (selectedOperator.equals("Equals"))
         {
-            case "Equals":
-                operator = 0;
-            case "Greater than":
-                operator = 1;
-            case "Less than":
-                operator = 2;
-                break;
-                default:
-                    operator = 0;
-                    System.out.println("Empty Operator");
-        }
-        System.out.println(operator);
-        return operator;
-
+            System.out.println(e);
+            return e;
+        }else if(selectedOperator.equals("Greater than"))
+        {
+            System.out.println(g);
+            return g;
+        }else
+            System.out.println(t);
+            return t;
     }
-
-     public void setSelectSizeOperator()
+    /**
+     *  Add action listener every tme that user change the selection of the combo box "Size operator"
+     */
+    public void setSelectSizeOperator()
      {
          comboFileOperator.addActionListener(new ActionListener() {
                                                  @Override
@@ -393,7 +438,6 @@ public class PanelSearchParameters extends JPanel{
                                                      getSelectedSizeOperator();
                                                  }
                                              }
-
          );
      }
 
