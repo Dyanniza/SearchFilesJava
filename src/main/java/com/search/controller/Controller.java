@@ -13,9 +13,7 @@ import com.search.model.Asset;
 import com.search.view.MainWindow;
 import com.search.utils.Convertor;
 import javax.swing.JOptionPane;
-
 import com.search.view.PanelSearchParameters;
-
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -54,13 +52,13 @@ public class Controller
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
         fCriteria.setExt(searchC.getPanel().getExtension());
-        //fCriteria.setModDate(searchC.getPanel().getModifiedDate());
+        //fCriteria.setModDate(confile.converDateToLong(searchC.getPanel().getModifiedDate()));
         //fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
         //fCriteria.setAccDate(searchC.getPanel().getAccessDate());
-       // fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize(),"MB"));
+        //fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize(),"MB"));
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
         fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
-       // fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
+        //fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
 
         List<Asset> filesR=search.initSearch(fCriteria);
         
@@ -85,9 +83,7 @@ public class Controller
                 String[] dataresult= {sPath,sFilename,sExtension,mDate,sHidden,sReadonly};
                 this.searchC.getTableModel().addRow(dataresult);
             }
-
         }
-
         filesR.clear();
     }
 }
