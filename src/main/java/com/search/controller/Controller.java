@@ -52,13 +52,14 @@ public class Controller
         fCriteria.setPath(searchC.getPanel().getPath());
         fCriteria.setFileName(searchC.getPanel().getFileName());
         fCriteria.setExt(searchC.getPanel().getExtension());
-        //fCriteria.setModDate(confile.converDateToLong(searchC.getPanel().getModifiedDate()));
+        fCriteria.setModDate(confile.converDateToLong(searchC.getPanel().getModifiedDate()));
+        System.out.println(confile.converDateToLong(searchC.getPanel().getModifiedDate())+"from controller");
         //fCriteria.setCreDate(searchC.getPanel().getCreatedDate());
         //fCriteria.setAccDate(searchC.getPanel().getAccessDate());
         //fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize(),"MB"));
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
         fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
-        //fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
+        fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
 
         List<Asset> filesR=search.initSearch(fCriteria);
         
