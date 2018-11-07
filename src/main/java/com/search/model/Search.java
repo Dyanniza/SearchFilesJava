@@ -25,7 +25,12 @@ public class Search
     public Search()
     {
     }
-    // This method searches by path and filename, returns a list of FileResult objects
+
+    /**
+     *
+     * @param criteria
+     * @return
+     */
     public List<Asset> initSearch(Criteria criteria) {
         File fileP = new File(criteria.getPath());
         File[] fileList = fileP.listFiles();
@@ -35,10 +40,10 @@ public class Search
         int modDate;
 
         for (File f : fileList) {
-            // If f is directory the method is called again with the path and the filename
+            // If f is directory the method is called again with the path
+            if (criteria.getFIsDirectory()==false){
             if (f.isDirectory()) {
                 criteria.setPath(f.getPath());
-               // initSearch(f.getPath(), criteria.getFileName, criteria.getExt);
                 initSearch(criteria);
             } else {
                 fileN = f.getName();
@@ -90,6 +95,23 @@ public class Search
                            // }
                         }
                     }
+                }
+            }
+        }else
+            {
+                if (f.isDirectory()){
+                    criteria.setPath(f.getPath());
+                    initSearch(criteria);
+                    Asset fr = new Asset();
+                    fr.setPath(f.getPath());
+                    fr.setFileName(f.getName());
+                    fr.setModifiedDate(f.lastModified());
+                    //  fr.setCreatedDate(creDate);
+                    // fr.setAccessDate(accDate);
+                    fr.setHidden(f.isHidden());
+                    fr.setReadOnly(!f.canWrite());
+                    result.add(fr);
+
                 }
             }
         }
