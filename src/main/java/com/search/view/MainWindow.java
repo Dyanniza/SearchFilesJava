@@ -6,6 +6,12 @@
  * You shall not disclose such Confidential Information and shall use it only in accordance with the terms
  * of the license agreement you entered into  with Jalasoft.
  */
+/**
+ * Description: JFrame class that contains main panels results and search parameters
+ * configure basic setting for a Jframe and events
+ * @version 1.0
+ * @autor Cecilia Chalar
+ */
 package com.search.view;
 
 import javax.swing.ImageIcon;
@@ -25,7 +31,9 @@ public class MainWindow extends JFrame
         settings();
         init();
     }
-
+    /**
+     * Set initial parameters for the Frame component icon,,image, size
+     */
     public void settings()
     {
         setIconImage((new ImageIcon("resources/Images/filefind.png") ).getImage());
@@ -33,7 +41,11 @@ public class MainWindow extends JFrame
         setSize(1000,800);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
+    /**
+     * Configure the containers for the panels: Search and Results.
+     * Initialize the components Search and Results
+     * @param
+     */
     public void init()
     {
         panelSearch = new PanelSearchParameters();
@@ -52,7 +64,5 @@ public class MainWindow extends JFrame
     {
         return panelResults;
     }
-
     public DefaultTableModel getTableModel(){ return panelResults.getTableModel();}
-
 }

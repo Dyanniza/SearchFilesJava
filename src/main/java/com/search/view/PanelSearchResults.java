@@ -18,7 +18,11 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.BorderLayout;
-
+/**
+ * Description: JPanel class that contains the panel with the results table
+ * @version 1.0
+ * @autor Cecilia Chalar
+ */
 public class PanelSearchResults extends JPanel
 {
     private JLabel labelResults;
@@ -33,27 +37,22 @@ public class PanelSearchResults extends JPanel
     public PanelSearchResults()
     {
         settings();
-        init();
     }
+    /**
+     * Description: Set default model for the tables and initial configurations
+     */
     public void settings()
     {
         setBorder(BorderFactory.createTitledBorder("Search Results"));
         labelResults = new JLabel("No results found!!");
         tableModel = new DefaultTableModel(tableData, columnNames);
-       // DefaultTableModel tableModel = (DefaultTableModel) tableResults.getModel();
         tableResults = new JTable(tableModel);
         setLayout(new BorderLayout());
         tableScroll = new JScrollPane(tableResults);
         add(tableScroll, BorderLayout.CENTER);
-        //add(labelResults);
         setVisible(true);
-
     }
 
-    public void init()
-    {
-
-    }
     public DefaultTableModel getTableModel()
     {
         return tableModel;
