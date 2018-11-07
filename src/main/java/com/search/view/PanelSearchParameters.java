@@ -94,10 +94,10 @@ public class PanelSearchParameters extends JPanel{
         labelFileName = new JLabel("File Name:");
         labelExtension = new JLabel("Extension:");
         labelDateCriteria = new JLabel("Date Criteria:");
-        labelSelectedMDate = new JLabel("Modified Date:");
-        labelSelectedADate = new JLabel("Last Access Date:");
-        labelSelectedCDate = new JLabel("Created Date:");
-        labelSize = new JLabel("Size:");
+        labelSelectedMDate = new JLabel("Modified Date less than:");
+        labelSelectedADate = new JLabel("Last Access Date less than:");
+        labelSelectedCDate = new JLabel("Created Date less than:");
+        labelSize = new JLabel("Size (MB):");
         labelKind = new JLabel("Kind:");
         labelAdvancedOptions = new JLabel("Advanced Options");
         empty = new JLabel();
@@ -315,8 +315,15 @@ public class PanelSearchParameters extends JPanel{
     }
     public int getFileSize()
     {   int numFileSize;
-        String sFileSize = fileSize.getText();
-        numFileSize = Integer.parseInt(sFileSize);
+        if(!fileSize.getText().isEmpty())
+        {
+            String sFileSize = fileSize.getText();
+            numFileSize = Integer.parseInt(sFileSize);
+            System.out.println(numFileSize + "ss");
+
+        }else
+            {numFileSize=0;
+            }
         return numFileSize;
     }
 

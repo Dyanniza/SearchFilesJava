@@ -55,7 +55,8 @@ public class Controller
         fCriteria.setModDate(confile.converDateToLong(searchC.getPanel().getModifiedDate()));
         fCriteria.setCreDate(confile.converDateToLong((searchC.getPanel().getCreatedDate())));
         fCriteria.setAccDate(confile.converDateToLong((searchC.getPanel().getAccessDate())));
-        //fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize(),"MB"));
+        fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize()));
+        fCriteria.setFoperator(searchC.getPanel().getSelectedSizeOperator());
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
         fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
         fCriteria.setFIsDirectory(searchC.getPanel().getIfOnlyDir());
@@ -75,6 +76,7 @@ public class Controller
                 String sPath = fresult.getPath();
                 String sFilename = fresult.getFileName();
                 String sExtension = fresult.getExt();
+                String sSize = "jjj";
                 String mDate=confile.converToStringWithFormat(fresult.getModifiedDate());
                 String aDate=confile.converToStringWithFormat(fresult.getAccessDate());
                 String cDate=confile.converToStringWithFormat(fresult.getCreatedDate());
@@ -82,7 +84,7 @@ public class Controller
                 String sReadonly=confile.converBooleanToString(fresult.getReadOnly());
 
 
-                String[] dataresult= {sPath,sFilename,sExtension,mDate,aDate,cDate,sHidden,sReadonly};
+                String[] dataresult= {sPath,sFilename,sExtension,sSize,mDate,aDate,cDate,sHidden,sReadonly};
                 this.searchC.getTableModel().addRow(dataresult);
             }
         }

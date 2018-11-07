@@ -13,6 +13,7 @@ public class Asset
     private long aDate;
     private boolean hidden;
     private boolean readOnly;
+    private long size;
 
     public Asset()
     {
@@ -97,5 +98,16 @@ public class Asset
     {
         this.readOnly = readOnly;
     }
+
+    public long getSize()
+    {
+        return this.size;
+    }
+
+    public void setSize(long size)
+    {
+        this.size = size;
+    }
+
 
 }
