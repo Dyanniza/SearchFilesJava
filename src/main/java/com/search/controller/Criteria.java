@@ -100,7 +100,7 @@ public class Criteria
         this.foperator = operator;
     }
 
-    public long getFoperator()
+    public int getFoperator()
     {
         return this.foperator;
     }

@@ -76,7 +76,7 @@ public class Controller
                 String sPath = fresult.getPath();
                 String sFilename = fresult.getFileName();
                 String sExtension = fresult.getExt();
-                String sSize = "jjj";
+                String sSize = Long.toString(fresult.getSize());
                 String mDate=confile.converToStringWithFormat(fresult.getModifiedDate());
                 String aDate=confile.converToStringWithFormat(fresult.getAccessDate());
                 String cDate=confile.converToStringWithFormat(fresult.getCreatedDate());
