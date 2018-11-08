@@ -52,7 +52,7 @@ public class Convertor
      * Description: This method will return a long value that represent the bytes of the size passed on KB
      */
 
-    public long converToBytes(int sizef)
+    public long converToLong(int sizef)
     {
         if(sizef!=0)
         {
@@ -62,6 +62,12 @@ public class Convertor
         {
             return 0;
         }
+    }
+
+    public long converToKB(long ssize)
+    {
+        long res=(int) Math.ceil(ssize/1024.0);
+        return res;
     }
     /*
      * Method:converBooleanToString
