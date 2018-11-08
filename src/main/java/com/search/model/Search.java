@@ -80,19 +80,20 @@ public class Search {
                                             fr.setAccessDate(accDate);
                                             fr.setHidden(f.isHidden());
                                             fr.setReadOnly(!f.canWrite());
-                                            //int sizeFile=Long.compare(criteria.getFsize(),f.length());
                                             if (criteria.getFHidden() == false && criteria.getFReadOnly() == false)
                                              {
-                                                 switch (criteria.getFoperator()){
-                                                    case 0: if (Long.valueOf(criteria.getFsize())==Long.valueOf(f.length()))
-                                                                result.add(fr);
-                                                    case 1: if (f.length()>criteria.getFsize())
-                                                                result.add(fr);
-                                                    case 2: if (criteria.getFsize()> f.length())
-                                                                result.add(fr);
-
-                                                }
-                                                // result.add(fr);
+                                                 if (criteria.getFsize()!=0)
+                                                 {
+                                                   if (criteria.getFoperator() == 0 && (criteria.getFsize() == f.length()))
+                                                        result.add(fr);
+                                                   else{
+                                                       if (criteria.getFoperator() == 1 && (criteria.getFsize() < f.length()))
+                                                           result.add(fr);
+                                                       else if (criteria.getFoperator() == 2 && (criteria.getFsize() > f.length()))
+                                                           result.add(fr);
+                                                   }
+                                                 } else
+                                                     result.add(fr);
                                              } else
                                                 {
                                                     if ((criteria.getFHidden() == true) && (criteria.getFReadOnly() == false))
@@ -131,6 +132,7 @@ public class Search {
                           Asset fr = new Asset();
                           fr.setPath(f.getPath());
                           fr.setFileName(f.getName());
+                          fr.setSize(f.length());
                           fr.setModifiedDate(modDate);
                           fr.setCreatedDate(creDate);
                           fr.setAccessDate(accDate);
