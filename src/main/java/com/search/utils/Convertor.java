@@ -54,13 +54,13 @@ public class Convertor
 
     public long converToLong(int sizef)
     {
-        if(sizef!=0)
+        if(sizef>=0)
         {
             long res=sizef;
             return res;
         }else
         {
-            return 0;
+            return 4;
         }
     }
 

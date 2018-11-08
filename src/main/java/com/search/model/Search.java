@@ -82,7 +82,7 @@ public class Search {
                                             fr.setReadOnly(!f.canWrite());
                                             if (criteria.getFHidden() == false && criteria.getFReadOnly() == false)
                                              {
-                                                 if (criteria.getFsize()!=0)
+                                               if (criteria.getFsize()!=0)
                                                  {
                                                    if (criteria.getFoperator() == 0 && (criteria.getFsize() == f.length()))
                                                         result.add(fr);
@@ -93,7 +93,7 @@ public class Search {
                                                            result.add(fr);
                                                    }
                                                  } else
-                                                     result.add(fr);
+                                                 result.add(fr);
                                              } else
                                                 {
                                                     if ((criteria.getFHidden() == true) && (criteria.getFReadOnly() == false))

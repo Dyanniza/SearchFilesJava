@@ -103,7 +103,7 @@ public class PanelSearchParameters extends JPanel{
         labelSelectedMDate = new JLabel("Modified Date less than:");
         labelSelectedADate = new JLabel("Last Access Date less than:");
         labelSelectedCDate = new JLabel("Created Date less than:");
-        labelSize = new JLabel("Size (MB):");
+        labelSize = new JLabel("Size (Bytes):");
         labelKind = new JLabel("Kind:");
         labelAdvancedOptions = new JLabel("Advanced Options");
         empty = new JLabel();
