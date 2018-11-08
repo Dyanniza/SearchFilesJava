@@ -56,7 +56,7 @@ public class Convertor
     {
         if(sizef!=0)
         {
-            long res=sizef*1024;
+            long res=sizef;
             return res;
         }else
         {
