@@ -91,7 +91,7 @@ public class CriteriaTest extends Criteria {
     }
 
     @Test
-    public long getFoperator() {
+    public int getFoperator() {
         return 0;
     }
 

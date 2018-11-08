@@ -15,6 +15,7 @@ import com.search.utils.Convertor;
 import javax.swing.JOptionPane;
 import com.search.view.PanelSearchParameters;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
@@ -55,7 +56,7 @@ public class Controller
         fCriteria.setModDate(confile.converDateToLong(searchC.getPanel().getModifiedDate()));
         fCriteria.setCreDate(confile.converDateToLong((searchC.getPanel().getCreatedDate())));
         fCriteria.setAccDate(confile.converDateToLong((searchC.getPanel().getAccessDate())));
-        fCriteria.setFsize(confile.converToBytes(searchC.getPanel().getFileSize()));
+        fCriteria.setFsize(confile.converToLong(searchC.getPanel().getFileSize()));
         fCriteria.setFoperator(searchC.getPanel().getSelectedSizeOperator());
         fCriteria.setFHidden(searchC.getPanel().getIfHidden());
         fCriteria.setFReadOnly(searchC.getPanel().getIfReadOnly());
@@ -76,7 +77,10 @@ public class Controller
                 String sPath = fresult.getPath();
                 String sFilename = fresult.getFileName();
                 String sExtension = fresult.getExt();
-                String sSize = Long.toString(fresult.getSize());
+                String sSize = Long.toString(confile.converToKB(fresult.getSize()));
+
+               // String sSize = Integer.toString ((int) Math.ceil(confile.converToKB(fresult.getSize())));
+
                 String mDate=confile.converToStringWithFormat(fresult.getModifiedDate());
                 String aDate=confile.converToStringWithFormat(fresult.getAccessDate());
                 String cDate=confile.converToStringWithFormat(fresult.getCreatedDate());
