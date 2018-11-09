@@ -19,6 +19,12 @@ public class Asset
     {
     }
 
+    /**
+     * Methods: Get and  Set methods for all attributes of Asset class
+     * @param  path, fileName, ext, mDate(modification Date), cDate(Creation Date), aDate(Last access Date), hidden
+     *              readOnly, size(in bytes)
+     */
+
     public void setPath(String path)
     {
         this.path = path;
