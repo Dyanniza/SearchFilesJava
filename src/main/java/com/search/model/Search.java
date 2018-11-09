@@ -21,12 +21,16 @@ import java.io.IOException;
 public class Search {
     private List<Asset> result = new ArrayList();
 
-    public Search() {
+    public Search()
+    {
     }
 
     /**
-     * @param criteria
-     * @return
+     * Methods: initSearch()
+     * Description: This is a recursive method that searches by Path, File Name, Extension, Modified Date, Last Access Date, Created Date, Size
+     * in bytes. In the advanced Options there is the option to search the hidden files, read only files, and list directories
+     * @param Criteria
+     * @return List<Asset>
      */
     public List<Asset> initSearch(Criteria criteria) {
         File fileP = new File(criteria.getPath());

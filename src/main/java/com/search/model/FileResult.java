@@ -8,6 +8,9 @@
  */
 package com.search.model;
 
+/**
+ * FileResult class extends from Asset class
+ */
 public class FileResult extends Asset
 {
        public FileResult()
