@@ -144,9 +144,9 @@ public class PanelSearchParameters extends JPanel{
         datePickerC = new JDatePickerImpl(datePanelC, new DateComponentFormatter());
         comboFileOperator = new JComboBox(setSizeOperator());
         comboFileKind = new JComboBox(setKindList());
-        checkBoxHidden = new JCheckBox("Hidden fields?", false);
+        checkBoxHidden = new JCheckBox("Hidden Files?", false);
         checkBoxDirectory = new JCheckBox("Directory Only?", false);
-        checkBoxReadOnly = new JCheckBox("Read Only", false);
+        checkBoxReadOnly = new JCheckBox("Read Only Files?", false);
 
         panelFieldNames = new JPanel();
         panelInputFields = new JPanel();
@@ -291,10 +291,6 @@ public class PanelSearchParameters extends JPanel{
         });
     }
 
-    public PanelSearchParameters getSearchPanel()
-    {
-        return this;
-    }
     /**
      * @return JButton Search with all configured properties
      */
