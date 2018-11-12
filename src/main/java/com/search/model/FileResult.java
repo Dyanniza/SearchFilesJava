@@ -6,14 +6,15 @@
  * You shall not disclose such Confidential Information and shall use it only in accordance with the terms
  * of the license agreement you entered into  with Jalasoft.
  */
-package com.search;
+package com.search.model;
 
-import com.search.controller.Controller;
-
-public class Main
+/**
+ * FileResult class extends from Asset class
+ */
+public class FileResult extends Asset
 {
-    public static void main (String [] arg)
+       public FileResult()
     {
-        Controller control = new Controller();
     }
+
 }
